@@ -61,13 +61,13 @@ export default function CarPage() {
       <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_360px]">
         <div>
           <div className="card overflow-hidden">
-            <div className="aspect-[16/10] bg-slate-200"><CarImage src={photo} id={car.id} alt={`${car.brand} ${car.model}`} /></div>
+            <div className="aspect-[16/10] bg-slate-200"><CarImage src={photo} id={car.id} brand={car.brand} alt={`${car.brand} ${car.model}`} /></div>
             {car.photos.length > 1 && (
               <div className="flex gap-2 overflow-x-auto p-3">
                 {car.photos.map((p, i) => (
                   <button key={p.id} onClick={() => setIdx(i)} aria-label={`Фото ${i + 1}`}
                     className={`h-16 w-24 shrink-0 overflow-hidden rounded border-2 ${i === idx ? 'border-road' : 'border-transparent'}`}>
-                    <CarImage src={p.url} id={car.id} />
+                    <CarImage src={p.url} id={car.id} brand={car.brand} alt={`${car.brand} ${car.model}`} />
                   </button>
                 ))}
               </div>

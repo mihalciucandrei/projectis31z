@@ -13,7 +13,7 @@ export default function CarCard({ car }) {
     <article className="card group overflow-hidden transition-shadow hover:shadow-md">
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-200">
         <Link href={`/cars/${car.id}`} aria-label={`${car.brand} ${car.model}`} className="block h-full">
-          <CarImage src={car.main_photo} id={car.id} alt={`${car.brand} ${car.model}`} />
+          <CarImage src={car.main_photo} id={car.id} brand={car.brand} alt={`${car.brand} ${car.model}`} />
         </Link>
         {car.status !== 'active' && <div className="absolute left-2 top-2"><StatusBadge status={car.status} /></div>}
         {!own && (

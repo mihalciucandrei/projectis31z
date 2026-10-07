@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.core.security import hash_password
 from app.db.models import (
-    Car, Favorite, ListingStatus, Message, Reservation, ReservationStatus, User, UserRole, utcnow,
+    Car, CarPhoto, Favorite, ListingStatus, Message, Reservation, ReservationStatus, User, UserRole, utcnow,
 )
 
 USERS = [
@@ -46,6 +46,22 @@ CARS = [
     ("Opel", "Astra", 2014, 6200, 175000, "diesel", "manual", "hatchback", "Bălți", 2, 130, "sold", "Продан — остаётся в архиве статистики."),
 ]
 
+BRAND_PHOTO_URLS = {
+    "Volkswagen": "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
+    "BMW": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80",
+    "Mercedes-Benz": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
+    "Audi": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1200&q=80",
+    "Toyota": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+    "Skoda": "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=1200&q=80",
+    "Dacia": "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80",
+    "Renault": "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1200&q=80",
+    "Ford": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
+    "Honda": "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80",
+    "Tesla": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=80",
+    "Hyundai": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+    "Opel": "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
+}
+
 
 def seed_demo_data(db: Session) -> None:
     if db.scalar(select(User.id).limit(1)):
@@ -71,6 +87,9 @@ def seed_demo_data(db: Session) -> None:
         db.add(c)
         cars.append(c)
     db.flush()
+
+    for car in cars:
+        db.add(CarPhoto(car_id=car.id, url=BRAND_PHOTO_URLS.get(car.brand, BRAND_PHOTO_URLS["Volkswagen"]), is_main=True))
 
     buyer = users[3]
     for car in (cars[0], cars[5], cars[22]):

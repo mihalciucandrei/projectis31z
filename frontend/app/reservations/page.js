@@ -12,7 +12,7 @@ function ResCard({ r, mode, onAction, busy }) {
   return (
     <div className="card flex flex-col gap-4 p-4 sm:flex-row">
       <div className="h-28 w-full shrink-0 overflow-hidden rounded bg-slate-200 sm:w-44">
-        <CarImage src={r.car.main_photo} id={r.car.id} alt={`${r.car.brand} ${r.car.model}`} />
+        <CarImage src={r.car.main_photo} id={r.car.id} brand={r.car.brand} alt={`${r.car.brand} ${r.car.model}`} />
       </div>
       <div className="flex-1">
         <div className="flex flex-wrap items-center gap-2">

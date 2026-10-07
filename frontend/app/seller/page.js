@@ -28,7 +28,7 @@ export default function SellerCars() {
         <div className="space-y-3">
           {cars.map((c) => (
             <div key={c.id} className="card flex flex-col gap-3 p-3 sm:flex-row sm:items-center">
-              <div className="h-24 w-full shrink-0 overflow-hidden rounded bg-slate-200 sm:w-40"><CarImage src={c.main_photo} id={c.id} alt="" /></div>
+              <div className="h-24 w-full shrink-0 overflow-hidden rounded bg-slate-200 sm:w-40"><CarImage src={c.main_photo} id={c.id} brand={c.brand} alt={`${c.brand} ${c.model}`} /></div>
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <Link href={`/cars/${c.id}`} className="font-bold hover:underline">{c.brand} {c.model}, {c.year}</Link>
